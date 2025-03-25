@@ -1,6 +1,6 @@
 import { Page, type Locator } from 'playwright';
 import {expect} from "@playwright/test";
-import irregularHoursAndPartYearContent from "../content/irregularHoursAndPartYearPage_content";
+import irregularHoursAndPartYear_content from "../content/irregularHoursAndPartYearPage_content";
 
 export class IrregularHoursAndPartYearPage {
     private readonly page: Page;
@@ -21,22 +21,25 @@ export class IrregularHoursAndPartYearPage {
     constructor(page: Page) {
         this.date = new Date();
         this.page = page;
-        this.title = irregularHoursAndPartYearContent.pageTitle;
-        this.caption = irregularHoursAndPartYearContent.caption;
-        this.heading = irregularHoursAndPartYearContent.heading;
-        this.text_line1 = irregularHoursAndPartYearContent.text_line1;
-        this.day_label = irregularHoursAndPartYearContent.day_label;
-        this.month_label = irregularHoursAndPartYearContent.month_label;
-        this.year_label = irregularHoursAndPartYearContent.year_label; 
-        this.continue_button = page.getByRole('button', { name: irregularHoursAndPartYearContent.continue_button });
-        this.your_answers_subheading = irregularHoursAndPartYearContent.your_answers_subheading;
-        this.previous_page_heading = irregularHoursAndPartYearContent.previous_page_heading;
-        this.start_again_link = page.locator('a', { hasText: irregularHoursAndPartYearContent.start_again_link });
-        this.change_link = page.locator('a', { hasText: irregularHoursAndPartYearContent.change_link }).nth(2);
+        this.title = irregularHoursAndPartYear_content.pageTitle;
+        this.caption = irregularHoursAndPartYear_content.caption;
+        this.heading = irregularHoursAndPartYear_content.heading;
+        this.text_line1 = irregularHoursAndPartYear_content.text_line1;
+        this.day_label = irregularHoursAndPartYear_content.day_label;
+        this.month_label = irregularHoursAndPartYear_content.month_label;
+        this.year_label = irregularHoursAndPartYear_content.year_label; 
+        this.continue_button = page.getByRole('button', { name: irregularHoursAndPartYear_content.continue_button });
+        this.your_answers_subheading = irregularHoursAndPartYear_content.your_answers_subheading;
+        this.previous_page_heading = irregularHoursAndPartYear_content.previous_page_heading;
+        this.start_again_link = page.locator('a', { hasText: irregularHoursAndPartYear_content.start_again_link });
+        this.change_link = page.locator('a', { hasText: irregularHoursAndPartYear_content.change_link }).nth(2);
     }
 
     async checkPageLoads(page: Page): Promise<void> {
         // Check all elements of the page
+
+        // await page.goto('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year');
+
         await Promise.all([
             await expect(this.continue_button).toBeVisible(),
             await expect(page).toHaveTitle(this.title),
@@ -54,9 +57,9 @@ export class IrregularHoursAndPartYearPage {
     }
 
     async enterDate(): Promise<void> {
-        await this.page.getByLabel(irregularHoursAndPartYearContent.day_label).fill(this.date.getUTCDate().toString())
-        await this.page.getByLabel(irregularHoursAndPartYearContent.month_label).fill((this.date.getUTCMonth()+1).toString())
-        await this.page.getByLabel(irregularHoursAndPartYearContent.year_label).fill(this.date.getUTCFullYear().toString())
+        await this.page.getByLabel(irregularHoursAndPartYear_content.day_label).fill(this.date.getUTCDate().toString())
+        await this.page.getByLabel(irregularHoursAndPartYear_content.month_label).fill((this.date.getUTCMonth()+1).toString())
+        await this.page.getByLabel(irregularHoursAndPartYear_content.year_label).fill(this.date.getUTCFullYear().toString())
     }
 
     async startAgain(): Promise<void> {

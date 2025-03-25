@@ -8,6 +8,9 @@
     "typescript": "^5.7.3"
   },
   "scripts": {
-    "test": "playwright test --project chromium --headed"
+    "install playwright": "yarn playwright install",
+    "test chrome": "playwright test --project chromium --headed",
+    "test": "yarn playwright test",
+    "test:ui": "yarn playwright test --ui"
   }
 }
