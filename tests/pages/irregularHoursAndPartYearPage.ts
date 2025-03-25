@@ -62,6 +62,16 @@ export class IrregularHoursAndPartYearPage {
         await this.page.getByLabel(irregularHoursAndPartYear_content.year_label).fill(this.date.getUTCFullYear().toString())
     }
 
+    async checkForErrorMessage(): Promise<void> {
+        const errorHeadingLocator = this.page.locator('.govuk-error-summary__title');
+        await expect(errorHeadingLocator).toBeVisible();
+        await expect(errorHeadingLocator).toHaveText(irregularHoursAndPartYear_content.error_heading);
+
+        const errorTextLocator = this.page.locator('a', { hasText: irregularHoursAndPartYear_content.error_message });
+        await expect(errorTextLocator).toBeVisible();
+        await expect(errorTextLocator).toHaveText(irregularHoursAndPartYear_content.error_message);
+    }
+
     async startAgain(): Promise<void> {
         await this.start_again_link.click();
     }

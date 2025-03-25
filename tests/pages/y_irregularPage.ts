@@ -37,7 +37,6 @@ export class Y_IrregularPage {
     }
 
     async clickYesButton(): Promise<void> {
-        await this.page.pause();
         await this.yes_radio_button.click();
     }
 
