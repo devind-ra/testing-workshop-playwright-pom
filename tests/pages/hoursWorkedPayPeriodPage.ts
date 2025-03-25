@@ -29,7 +29,7 @@ export class HoursWorkedPayPeriodPage {
     
     async checkPageLoads(page: Page): Promise<void> {
         // Navigate to the landing page
-        await page.goto('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2025-03-25');
+        // await page.goto('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2025-03-25');
 
         // Check all elements of the page
         await Promise.all([
