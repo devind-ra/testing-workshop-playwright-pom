@@ -1,6 +1,7 @@
 import { Page, type Locator } from 'playwright';
 import {expect} from "@playwright/test";
 import irregularHoursAndPartYear_content from "../content/irregularHoursAndPartYearPage_content";
+import { ErrorHelp } from '../../helpers/error-message-check';
 
 export class IrregularHoursAndPartYearPage {
     private readonly page: Page;
@@ -60,6 +61,11 @@ export class IrregularHoursAndPartYearPage {
         await this.page.getByLabel(irregularHoursAndPartYear_content.day_label).fill(this.date.getUTCDate().toString())
         await this.page.getByLabel(irregularHoursAndPartYear_content.month_label).fill((this.date.getUTCMonth()+1).toString())
         await this.page.getByLabel(irregularHoursAndPartYear_content.year_label).fill(this.date.getUTCFullYear().toString())
+    }
+
+    async checkForErrorMessage(): Promise<void> {
+        const errorHelp = new ErrorHelp();
+        await errorHelp.checkForErrorMessage(this.page, irregularHoursAndPartYear_content.error_heading, irregularHoursAndPartYear_content.error_message)
     }
 
     async startAgain(): Promise<void> {

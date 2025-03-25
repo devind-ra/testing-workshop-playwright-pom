@@ -11,6 +11,8 @@ const irregularHoursAndPartYear_content = {
     previous_page_heading: "Does the employee work irregular hours or for part of the year?",
     start_again_link: "Start again",
     change_link: "Change",
+    error_message: "Please answer this question",
+    error_heading: "There is a problem",
 } as const;
 
 export default irregularHoursAndPartYear_content

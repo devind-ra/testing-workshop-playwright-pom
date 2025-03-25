@@ -24,3 +24,20 @@ test.only(`Page object model happy path`, async ({ page }): Promise<void> => {
     await hoursWorkedPayPeriodPage.enterHours();
     await hoursWorkedPayPeriodPage.continueOn();
 });
+
+test.only(`Page object model unhappy path - leave year error`, async ({ page }): Promise<void> => {
+    const landingPage: LandingPage = new LandingPage(page);
+    await landingPage.checkPageLoads(page);
+    await landingPage.continueOn();
+
+    const y_irregularPage: Y_IrregularPage = new Y_IrregularPage(page);
+    await y_irregularPage.checkPageLoads(page);
+    await y_irregularPage.clickYesButton();
+    await y_irregularPage.continueOn();
+
+    const irregularHoursAndPartYearPage: IrregularHoursAndPartYearPage = new IrregularHoursAndPartYearPage(page);
+    await irregularHoursAndPartYearPage.checkPageLoads(page);
+    await irregularHoursAndPartYearPage.continueOn();
+    await irregularHoursAndPartYearPage.checkForErrorMessage();
+});
+
