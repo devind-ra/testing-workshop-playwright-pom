@@ -1,6 +1,7 @@
 import { Page, type Locator } from 'playwright';
 import {expect} from "@playwright/test";
 import y_irregularPage_content from "../content/y_irregularPage_content";
+import { ErrorHelp } from '../../helpers/error-message-check';
 
 export class Y_IrregularPage {
     private readonly page: Page;
@@ -43,6 +44,13 @@ export class Y_IrregularPage {
     async continueOn(): Promise<void> {
         await this.continue_button.click();
     }
+
+    async checkForErrorMessage(): Promise<void> {
+        const errorHelp = new ErrorHelp();
+        await errorHelp.checkForErrorMessage(this.page, y_irregularPage_content.error_heading, y_irregularPage_content.error_message);
+    }
+    
 }
+    
 
 export default Y_IrregularPage;
