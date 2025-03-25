@@ -1,4 +1,4 @@
-const irregularHoursAndPartYearContent = {
+const irregularHoursAndPartYear_content = {
     pageTitle: "When does the leave year start? - Calculate holiday entitlement - GOV.UK",
     caption: "Calculate holiday entitlement",
     heading: "When does the leave year start?",
@@ -13,4 +13,4 @@ const irregularHoursAndPartYearContent = {
     change_link: "Change",
 } as const;
 
-export default irregularHoursAndPartYearContent
+export default irregularHoursAndPartYear_content
