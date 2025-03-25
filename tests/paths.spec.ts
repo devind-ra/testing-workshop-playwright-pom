@@ -4,7 +4,7 @@ import Y_IrregularPage from "./pages/y_irregularPage";
 import IrregularHoursAndPartYearPage from "./pages/irregularHoursAndPartYearPage";
 import HoursWorkedPayPeriodPage from "./pages/hoursWorkedPayPeriodPage";
 
-test.only(`Page object model happy path`, async ({ page }): Promise<void> => {
+test(`Page object model happy path`, async ({ page }): Promise<void> => {
     const landingPage: LandingPage = new LandingPage(page);
     await landingPage.checkPageLoads(page);
     await landingPage.continueOn();
@@ -25,7 +25,7 @@ test.only(`Page object model happy path`, async ({ page }): Promise<void> => {
     await hoursWorkedPayPeriodPage.continueOn();
 });
 
-test.only(`Page object model unhappy path - leave year error`, async ({ page }): Promise<void> => {
+test(`Page object model unhappy path - leave year error`, async ({ page }): Promise<void> => {
     const landingPage: LandingPage = new LandingPage(page);
     await landingPage.checkPageLoads(page);
     await landingPage.continueOn();
