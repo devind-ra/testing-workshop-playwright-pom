@@ -1,6 +1,7 @@
 import { Page, type Locator } from 'playwright';
 import {expect} from "@playwright/test";
 import irregularHoursAndPartYear_content from "../content/irregularHoursAndPartYearPage_content";
+import { ErrorHelp } from '../../helpers/error-message-check';
 
 export class IrregularHoursAndPartYearPage {
     private readonly page: Page;
@@ -63,13 +64,8 @@ export class IrregularHoursAndPartYearPage {
     }
 
     async checkForErrorMessage(): Promise<void> {
-        const errorHeadingLocator = this.page.locator('.govuk-error-summary__title');
-        await expect(errorHeadingLocator).toBeVisible();
-        await expect(errorHeadingLocator).toHaveText(irregularHoursAndPartYear_content.error_heading);
-
-        const errorTextLocator = this.page.locator('a', { hasText: irregularHoursAndPartYear_content.error_message });
-        await expect(errorTextLocator).toBeVisible();
-        await expect(errorTextLocator).toHaveText(irregularHoursAndPartYear_content.error_message);
+        const errorHelp = new ErrorHelp();
+        await errorHelp.checkForErrorMessage(this.page, irregularHoursAndPartYear_content.error_heading, irregularHoursAndPartYear_content.error_message)
     }
 
     async startAgain(): Promise<void> {
