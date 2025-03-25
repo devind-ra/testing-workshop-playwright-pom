@@ -39,5 +39,19 @@ test.only(`Page object model unhappy path - leave year error`, async ({ page }):
     await irregularHoursAndPartYearPage.checkPageLoads(page);
     await irregularHoursAndPartYearPage.continueOn();
     await irregularHoursAndPartYearPage.checkForErrorMessage();
+
+});
+
+
+test.only(`Page object model unhappy path - irregular hours error page`, async ({ page }): Promise<void> => {
+    const landingPage: LandingPage = new LandingPage(page);
+    await landingPage.checkPageLoads(page);
+    await landingPage.continueOn();
+
+    const y_irregularPage: Y_IrregularPage = new Y_IrregularPage(page);
+    await y_irregularPage.checkPageLoads(page);
+    await y_irregularPage.continueOn();
+    await y_irregularPage.checkForErrorMessage();
+
 });
 
