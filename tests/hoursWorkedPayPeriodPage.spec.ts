@@ -1,7 +1,7 @@
 import {test} from "@playwright/test";
-import hoursWorkedPayPeriod, { HoursWorkedPayPeriodPage } from "./pages/hoursWorkedPayPeriodPage";
+import HoursWorkedPayPeriodPage from "./pages/hoursWorkedPayPeriodPage";
 
-test.only(`Page object model happy path for second test`, async ({ page }): Promise<void> => {
+test(`Page object model test for hours worked pay period page`, async ({ page }): Promise<void> => {
     const hoursWorkedPayPeriodPage: HoursWorkedPayPeriodPage = new HoursWorkedPayPeriodPage(page);
     await hoursWorkedPayPeriodPage.checkPageLoads(page);
     await hoursWorkedPayPeriodPage.enterHours();
