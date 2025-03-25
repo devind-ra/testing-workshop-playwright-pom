@@ -58,6 +58,7 @@ export class IrregularHoursAndPartYearPage {
     }
 
     async enterDate(): Promise<void> {
+        await this.page.waitForLoadState();
         await this.page.getByLabel(irregularHoursAndPartYear_content.day_label).fill(this.date.getUTCDate().toString())
         await this.page.getByLabel(irregularHoursAndPartYear_content.month_label).fill((this.date.getUTCMonth()+1).toString())
         await this.page.getByLabel(irregularHoursAndPartYear_content.year_label).fill(this.date.getUTCFullYear().toString())
