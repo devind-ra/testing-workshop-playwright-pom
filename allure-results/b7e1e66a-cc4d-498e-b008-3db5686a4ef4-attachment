@@ -1,0 +1,230 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Page object model happy path
+- Location: /Users/devin.rathod/Documents/Code/testing-workshop-playwright-pom/tests/paths.spec.ts:7:6
+
+# Error details
+
+```
+Error: Timed out 60000ms waiting for expect(locator).toHaveTitle(expected)
+
+Locator: locator(':root')
+Expected string: "How many hours has the employee worked in the pay period? - Calculate holiday entitlement - GOV.UK"
+Received string: "Error - When does the leave year start? - Calculate holiday entitlement - GOV.UK"
+Call log:
+  - expect.toHaveTitle with timeout 60000ms
+  - waiting for locator(':root')
+    63 × locator resolved to <html lang="en" class="govuk-template">…</html>
+       - unexpected value "Error - When does the leave year start? - Calculate holiday entitlement - GOV.UK"
+
+    at HoursWorkedPayPeriodPage.checkPageLoads (/Users/devin.rathod/Documents/Code/testing-workshop-playwright-pom/tests/pages/hoursWorkedPayPeriodPage.ts:36:32)
+    at /Users/devin.rathod/Documents/Code/testing-workshop-playwright-pom/tests/paths.spec.ts:23:36
+```
+
+# Page snapshot
+
+```yaml
+- region "Cookies on GOV.UK":
+  - heading "Cookies on GOV.UK" [level=2]
+  - paragraph: We use some essential cookies to make this website work.
+  - paragraph: We’d like to set additional cookies to understand how you use GOV.UK, remember your settings and improve government services.
+  - paragraph: We also use cookies set by other sites to help us deliver content from their services.
+  - button "Accept additional cookies"
+  - button "Reject additional cookies"
+  - link "View cookies"
+- link "Skip to main content"
+- banner:
+  - link "Go to the GOV.UK homepage":
+    - img "GOV.UK"
+  - navigation "Navigation menu":
+    - heading "Navigation menu" [level=2]
+    - button "Show navigation menu": Menu
+    - button "Show search menu": Search GOV.UK
+- main:
+  - alert:
+    - heading "There is a problem" [level=2]
+    - list:
+      - listitem:
+        - link "Please answer this question"
+  - text: Calculate holiday entitlement
+  - group "When does the leave year start?":
+    - heading "When does the leave year start?" [level=1]
+    - text: This is usually in the employment contract. If it is not and the job was started after 1 October 1998, the leave year will start on the 1st day of the job. If the job was started on or before 1 October 1998, the leave year will start on 1 October.
+    - paragraph: "Error: Please answer this question"
+    - text: Day
+    - paragraph: "Error:"
+    - textbox "Day"
+    - text: Month
+    - paragraph: "Error:"
+    - textbox "Month"
+    - text: Year
+    - paragraph: "Error:"
+    - textbox "Year"
+  - button "Continue"
+  - heading "Your answers" [level=2]
+  - paragraph:
+    - link "Start again"
+  - term: Does the employee work irregular hours or for part of the year?
+  - definition: "Yes"
+  - definition:
+    - link "Change Does the employee work irregular hours or for part of the year?"
+- heading "Is this page useful?" [level=2]
+- list:
+  - listitem:
+    - button "Yes this page is useful"
+  - listitem:
+    - button "No this page is not useful"
+- button "Report a problem with this page"
+- contentinfo:
+  - heading "Services and information" [level=2]
+  - list:
+    - listitem:
+      - link "Benefits"
+    - listitem:
+      - link "Births, death, marriages and care"
+    - listitem:
+      - link "Business and self-employed"
+    - listitem:
+      - link "Childcare and parenting"
+    - listitem:
+      - link "Citizenship and living in the UK"
+    - listitem:
+      - link "Crime, justice and the law"
+    - listitem:
+      - link "Disabled people"
+    - listitem:
+      - link "Driving and transport"
+    - listitem:
+      - link "Education and learning"
+    - listitem:
+      - link "Employing people"
+    - listitem:
+      - link "Environment and countryside"
+    - listitem:
+      - link "Housing and local services"
+    - listitem:
+      - link "Money and tax"
+    - listitem:
+      - link "Passports, travel and living abroad"
+    - listitem:
+      - link "Visas and immigration"
+    - listitem:
+      - link "Working, jobs and pensions"
+  - heading "Government activity" [level=2]
+  - list:
+    - listitem:
+      - link "Departments"
+    - listitem:
+      - link "News"
+    - listitem:
+      - link "Guidance and regulation"
+    - listitem:
+      - link "Research and statistics"
+    - listitem:
+      - link "Policy papers and consultations"
+    - listitem:
+      - link "Transparency"
+    - listitem:
+      - link "How government works"
+    - listitem:
+      - link "Get involved"
+  - separator
+  - heading "Support links" [level=2]
+  - list:
+    - listitem:
+      - link "Help"
+    - listitem:
+      - link "Privacy"
+    - listitem:
+      - link "Cookies"
+    - listitem:
+      - link "Accessibility statement"
+    - listitem:
+      - link "Contact"
+    - listitem:
+      - link "Terms and conditions"
+    - listitem:
+      - link "Rhestr o Wasanaethau Cymraeg"
+    - listitem:
+      - link "Government Digital Service"
+  - text: All content is available under the
+  - link "Open Government Licence v3.0"
+  - text: ", except where otherwise stated"
+  - link "© Crown copyright"
+```
+
+# Test source
+
+```ts
+   1 | import { Page, type Locator } from 'playwright';
+   2 | import {expect} from "@playwright/test";
+   3 | import hoursWorkedPayPeriodPage_content from "../content/hoursWorkedPayPeriod_content";
+   4 |
+   5 | export class HoursWorkedPayPeriodPage {
+   6 |     private readonly page: Page;
+   7 |     private readonly title: string;
+   8 |     private readonly caption: string;
+   9 |     private readonly heading: string;
+  10 |     private readonly hours_label: Locator;
+  11 |     private readonly continue_button: Locator;
+  12 |     private readonly your_answers_subheading: string;
+  13 |     private readonly previous_page_heading: string;
+  14 |     private readonly start_again_link: Locator;
+  15 |     private readonly change_link: Locator;
+  16 |
+  17 |     constructor(page: Page) {
+  18 |         this.page = page;
+  19 |         this.title = hoursWorkedPayPeriodPage_content.pageTitle;
+  20 |         this.caption = hoursWorkedPayPeriodPage_content.caption;
+  21 |         this.heading = hoursWorkedPayPeriodPage_content.heading;
+  22 |         this.hours_label = page.locator('#response')
+  23 |         this.continue_button = page.getByRole('button', { name: hoursWorkedPayPeriodPage_content.continue_button });
+  24 |         this.your_answers_subheading = hoursWorkedPayPeriodPage_content.your_answers_subheading;
+  25 |         this.previous_page_heading = hoursWorkedPayPeriodPage_content.previous_page_heading;
+  26 |         this.start_again_link = page.locator('a', { hasText: hoursWorkedPayPeriodPage_content.start_again_link });
+  27 |         this.change_link = page.locator('a', { hasText: hoursWorkedPayPeriodPage_content.change_link }).nth(2);
+  28 |     }
+  29 |     
+  30 |     async checkPageLoads(page: Page): Promise<void> {
+  31 |         // Navigate to the landing page
+  32 |         // await page.goto('https://www.gov.uk/calculate-your-holiday-entitlement/y/irregular-hours-and-part-year/2025-03-25');
+  33 |
+  34 |         // Check all elements of the page
+  35 |         await Promise.all([
+> 36 |             await expect(page).toHaveTitle(this.title),
+     |                                ^ Error: Timed out 60000ms waiting for expect(locator).toHaveTitle(expected)
+  37 |             await expect(page.getByText(this.caption)).toBeVisible(),
+  38 |             await expect(page.getByRole('heading', { name: this.heading })).toBeVisible(),
+  39 |             await expect(page.getByText(this.your_answers_subheading)).toBeVisible(),
+  40 |             await expect(page.getByText(this.previous_page_heading).nth(0)).toBeVisible(),
+  41 |             await expect(this.start_again_link).toBeVisible(),
+  42 |             await expect(this.change_link).toBeVisible(),
+  43 |         ]);
+  44 |     }
+  45 |
+  46 |     async enterHours(): Promise<void> {
+  47 |         await this.hours_label.fill('100');
+  48 |     }
+  49 |
+  50 |     async startAgain(): Promise<void> {
+  51 |         await this.start_again_link.click();
+  52 |     }
+  53 |
+  54 |     async change(): Promise<void> {
+  55 |         await this.change_link.click();
+  56 |     }
+  57 |
+  58 |     async continueOn(): Promise<void> {
+  59 |         await this.continue_button.click();
+  60 |     }
+  61 | }
+  62 |
+  63 | export default HoursWorkedPayPeriodPage;
+  64 |
+```
